@@ -1,5 +1,7 @@
 package main
 
 func main() {
-	println("Hello,World!")
+	input := "1+2"
+	lex := NewLexer([]byte(input))
+	print(lex.Scan().String())
 }

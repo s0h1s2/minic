@@ -5,18 +5,30 @@ import "fmt"
 type TokenKind int
 
 const (
-	Plus TokenKind = iota
+	Start TokenKind = iota
+	Plus
 	Minus
 	Star
 	Slash
-	Int
+	IntLit
+	Eof
 )
+const tokenRepresentationArraySize = (Eof - Start) + 1
+
+var tokenRepresentation = [tokenRepresentationArraySize]string{
+	Plus:   "+",
+	Minus:  "-",
+	Slash:  "/",
+	Star:   "*",
+	IntLit: "INT",
+	Eof:    "EOF",
+}
 
 type Token struct {
-	kind         TokenKind
-	integerValue uint
+	kind  TokenKind
+	value string
 }
 
 func (t Token) String() string {
-	return fmt.Sprintf("(%d,%d)", t.kind, t.integerValue)
+	return fmt.Sprintf("Token(kind=%s,value=%s)\n", tokenRepresentation[t.kind], t.value)
 }
