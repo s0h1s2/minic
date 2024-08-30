@@ -30,5 +30,5 @@ type Token struct {
 }
 
 func (t Token) String() string {
-	return fmt.Sprintf("Token(kind=%s,value=%s)\n", tokenRepresentation[t.kind], t.value)
+	return fmt.Sprintf("Token(kind='%s',value='%s')\n", tokenRepresentation[t.kind], t.value)
 }
