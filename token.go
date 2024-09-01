@@ -29,6 +29,9 @@ type Token struct {
 	value string
 }
 
+func (kind TokenKind) String() string {
+	return tokenRepresentation[kind]
+}
 func (t Token) String() string {
-	return fmt.Sprintf("Token(kind='%s',value='%s')\n", tokenRepresentation[t.kind], t.value)
+	return fmt.Sprintf("Token(kind='%s',value='%s')\n", t.kind.String(), t.value)
 }

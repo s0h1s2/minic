@@ -5,7 +5,7 @@ type Expr interface {
 }
 
 type IntegerExpr struct {
-	Value int
+	Value string
 }
 type BinaryExpr struct {
 	Kind  TokenKind
