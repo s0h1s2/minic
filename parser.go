@@ -28,8 +28,13 @@ func (p *Parser) parsePrimary() Expr {
 func (p *Parser) parseMultiply() Expr {
 	left := p.parsePrimary()
 	for p.currentToken.kind == Star || p.currentToken.kind == Slash {
+		op := p.currentToken
 		p.nextToken()
-		left = p.parsePrimary()
+		left = &BinaryExpr{
+			Left:  left,
+			Right: p.parsePrimary(),
+			Kind:  op.kind,
+		}
 	}
 	return left
 
@@ -37,15 +42,19 @@ func (p *Parser) parseMultiply() Expr {
 
 func (p *Parser) parseAddition() Expr {
 	left := p.parseMultiply()
-	for p.currentToken.kind == Star || p.currentToken.kind == Slash {
+	for p.currentToken.kind == Plus || p.currentToken.kind == Minus {
+		op := p.currentToken
 		p.nextToken()
-		left = p.parseMultiply()
+		left = &BinaryExpr{
+			Left:  left,
+			Right: p.parseMultiply(),
+			Kind:  op.kind,
+		}
 	}
 	return left
-
-	return p.parseMultiply()
 }
 func (p *Parser) Parse() Expr {
+	// Fetch first token
 	p.nextToken()
 	return p.parseAddition()
 }
