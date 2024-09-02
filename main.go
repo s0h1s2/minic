@@ -1,23 +1,15 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
-
 func traverseExpr(expr Expr, indent int) {
 
 	switch e := expr.(type) {
 	case *IntegerExpr:
 		{
-			println(e.Value)
+			print(e.Value)
 		}
 	case *BinaryExpr:
 		{
 			indent += 2
-			fmt.Printf("%s\n", e.Kind.String())
-			fmt.Printf("\\"strings.Repeat("", indent))
-			fmt.Printf("/"strings.Repeat("", indent))
 			indent -= 2
 		}
 	}
